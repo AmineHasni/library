@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Library List</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let library of libraries">
+          <td>{{ library.libraryName }}</td>
+          <td>{{ library.libraryAddress }}</td>
+          <td>
+            <!-- <button class="btn update-btn" (click)="updateLibrary(library)">Update</button> -->
+            <button class="btn delete-btn" (click)="deleteLibrary(library)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn add-library-btn" (click)="navigateToAddLibrary()">Add Library</button>
+  </div>
+  

@@ -1,0 +1,108 @@
+<div class="container mt-5 bg-amber-100 p-8">
+  <form [formGroup]="developperForm" (ngSubmit)="onSubmit()">
+    <div class="flex flex-row">
+      <label for="">Library Name:</label>
+      <input
+        type="text"
+        class="form-control mr-8"
+        placeholder="Library Name"
+        formControlName="libraryName"
+      />
+      <label for="">Library Address:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Library Address"
+        formControlName="libraryAddress"
+      />
+    </div>
+    <h4>
+      Shelves:
+      <button
+        class="bg-blue-700 rounded-sm p-2 border-none"
+        (click)="addShelf()"
+        type="button"
+      >
+        Add New Shelf
+      </button>
+    </h4>
+    <div formArrayName="shelves" class="flex flex-row">
+      <div
+        *ngFor="let shelf of shelves().controls; let i = index"
+        [formGroupName]="i"
+        class="flex flex-col w-60 bg-yellow-900 items-center mr-8 px-8"
+      >
+        <div class="col lg-10">
+          <!--  shelf number
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Shelf Name"
+            formControlName="shelfNumber"
+          />
+          -->
+          <h1>Shelf Number {{i+1}}</h1>
+        </div>
+
+        <h5>
+          Books:
+          <button
+            class="bg-blue-700 rounded-sm p-2 border-none"
+            (click)="addBook(i)"
+            type="button"
+          >
+            Add New Book
+          </button>
+        </h5>
+        <div formArrayName="books" class="flex flex-col">
+          <div
+            *ngFor="let book of books(i).controls; let j = index"
+            [formGroupName]="j"
+            class="flex flex-col mb-8 border-b-4 items-center book"
+          >
+            <div class="flex flex-col">
+              <label for="">Book Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Book Name"
+                formControlName="name"
+              />
+            </div>
+            <div class="flex flex-col">
+              <label for="">Author Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Author Name"
+                formControlName="authorName"
+              />
+            </div>
+            <div class="col lg-1">
+              <button
+                class="bg-red-700 rounded-sm p-2 border-none my-2"
+                (click)="removeBook(i, j)"
+                type="button"
+              >
+                Remove Book
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row lg-2 items-center">
+          <button
+            class="bg-red-700 rounded-sm p-2 border-none my-2"
+            (click)="removeShelf(i)"
+            type="button"
+          >
+            Remove Shelf number {{ i + 1 }}
+          </button>
+        </div>
+      </div>
+    </div>
+        <button type="submit" class="bg-green-700 border-none rounded-sm mt-12 p-2">
+            Save Library
+        </button>
+  </form>
+</div>
